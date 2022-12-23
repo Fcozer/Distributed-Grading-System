@@ -9,6 +9,8 @@ import AcademicianView  from './views/academicians/AcademicianView';
 import LessonView from './views/lessons/LessonView';
 import Assistant from './assistant/Assistant';
 import Academician from './academician/Academician';
+import Submit from './hwsubmit/Submit';
+import Grade from './hwgrade/Grade';
 import Exam from './exam/Exam';
 import Homework from './homework/Homework';
 import { ToastContainer } from 'react-toastify';
@@ -37,6 +39,8 @@ function App() {
           <Route path ="/Student" element={<Student/>} />
           <Route path = "/Exam" element = {<Exam/>} />
           <Route path = "/Homework" element = {<Homework/>} />           
+          <Route path = "/Submit" element = {<Submit/>} />
+          <Route path = "/Grade" element = {<Grade/>} />
           <Route path ="/Assistant" element={<Assistant/>} />
           <Route path ="/Academician" element={<Academician/>} />
           <Route path='/StudentView' element= {<StudentView/>}/>

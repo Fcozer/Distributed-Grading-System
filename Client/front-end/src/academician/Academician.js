@@ -53,14 +53,28 @@ function Academician() {
               <Button color="inherit" 
                       href="./Exam"
               > 
-                EXAM
+                Exam
               </Button> 
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <Button color = "inherit" 
                       href="./Homework"
               > 
-                HOMEWORK
+                Homework
+              </Button>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Button color = "inherit"
+                      href="./Submit"
+              >
+                Submitted Homework by Student
+              </Button>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Button color = "inherit"
+                      href="./Grade"
+              >
+                Graded Homework by Student
               </Button>
             </MenuItem>
           </Menu> 
