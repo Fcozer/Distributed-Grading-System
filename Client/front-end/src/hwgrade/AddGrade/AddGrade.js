@@ -40,6 +40,13 @@ export function AddGrade(props) {
                            fullWidth
                 >
                 </TextField>
+                <TextField onChange={onFormInputChange}
+                           name="student_id"
+                           label="Student ID"
+                           color="secondary"
+                           fullWidth
+                >
+                </TextField>
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => props.close()}

@@ -73,6 +73,9 @@
   box-shadow: inset 0px 0px 25px 0px #888;
 }
 
+.appbar {
+  color: #2C3E50;
+}
 .second-input{
   padding-top: 20px;
 }

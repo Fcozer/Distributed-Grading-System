@@ -10,8 +10,8 @@ import LessonView from './views/lessons/LessonView';
 import Assistant from './assistant/Assistant';
 import Academician from './academician/Academician';
 import Submit from './hwsubmit/Submit';
+import Listhw from './listhw/Listhw';
 import Grade from './hwgrade/Grade';
-import Exam from './exam/Exam';
 import Homework from './homework/Homework';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,8 +37,8 @@ function App() {
           <Route path="/Login" element={<Login/>} />
           <Route path="/Admin" element={<Admin/>} />
           <Route path ="/Student" element={<Student/>} />
-          <Route path = "/Exam" element = {<Exam/>} />
-          <Route path = "/Homework" element = {<Homework/>} />           
+          <Route path = "/Homework" element = {<Homework/>} />
+          <Route path = "/Listhw" element = {<Listhw/>} />
           <Route path = "/Submit" element = {<Submit/>} />
           <Route path = "/Grade" element = {<Grade/>} />
           <Route path ="/Assistant" element={<Assistant/>} />

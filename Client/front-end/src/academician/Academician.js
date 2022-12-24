@@ -50,13 +50,6 @@ function Academician() {
             }}
           >
             <MenuItem onClick={handleClose}>
-              <Button color="inherit" 
-                      href="./Exam"
-              > 
-                Exam
-              </Button> 
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
               <Button color = "inherit" 
                       href="./Homework"
               > 

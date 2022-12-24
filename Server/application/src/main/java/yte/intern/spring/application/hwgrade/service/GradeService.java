@@ -10,6 +10,8 @@ import yte.intern.spring.application.hwsubmit.entity.Submit;
 import yte.intern.spring.application.hwsubmit.service.SubmitService;
 import yte.intern.spring.application.hwgrade.repository.GradeRepository;
 import yte.intern.spring.application.hwgrade.entity.Grade;
+import yte.intern.spring.application.student.entity.Student;
+import yte.intern.spring.application.student.service.StudentService;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -20,10 +22,13 @@ public class GradeService {
     
     private final GradeRepository gradeRepository;
     private final SubmitService submitService;
-
+    private final StudentService studentService;
     public MessageResponse addGrade(Grade grade) {
         Submit submit = submitService.getById(grade.getSubmits().getId());
         grade.setSubmits(submit);
+
+        Student student = studentService.getById(grade.getStudents().getId());
+        grade.setStudents(student);
 
         gradeRepository.save(grade);
         return new MessageResponse(ResponseType.SUCCESS, "Grade added successfully");
@@ -35,6 +40,10 @@ public class GradeService {
 
         Submit submit = submitService.getById(updateGrade.getSubmits().getId());
         updateGrade.setSubmits(submit);
+
+        Student student = studentService.getById(updateGrade.getStudents().getId());
+        updateGrade.setStudents(student);
+
         grade.update(updateGrade);
 
         gradeRepository.save(grade);

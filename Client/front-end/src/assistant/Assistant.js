@@ -51,13 +51,6 @@ function Assistant() {
           >
             <MenuItem onClick={handleClose}>
               <Button color= "inherit" 
-                      href="./Exam"
-              >
-                EXAM
-              </Button>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <Button color= "inherit" 
                       href="./Homework"
               > 
                 HOMEWORK

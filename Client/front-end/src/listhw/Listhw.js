@@ -1,47 +1,39 @@
-import React, {useEffect, useState} from "react";
-import {GradeApi} from "./api/GradeApi";
+import React, {useState} from "react";
+import {AppBar} from "@mui/material";
+import {ListhwApi} from "./api/ListhwApi";
+import {useEffect} from "react";
+import {DataGrid} from '@mui/x-data-grid';
 import {toast} from "react-toastify";
-import {AppBar, Button, IconButton} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+import {IconButton} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Box from '@mui/material/Box';
+import {Button} from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
-import Box from "@mui/material/Box";
-import {DataGrid} from "@mui/x-data-grid";
-import {AddGrade} from "./AddGrade/AddGrade";
 
-
-function Grade(){
-    const [grades, setGrades] = useState( []);
-    const [isAddGradeDialogOpen, setAddGradeDialogOpen] = useState(false);
+function Listhw() {
+    const [listhws, setListhws] = useState([]);
     const [selectionModel, setSelectionModel] = useState();
-    const gradeApi = new GradeApi();
+    const listhwApi = new ListhwApi();
 
-    async function getGrades() {
-        const response = await gradeApi.getGrades();
-        setGrades(response.data);
+    async function getListhws() {
+        const response = await listhwApi.getListhws();
+        setListhws(response.data);
     }
 
     useEffect(() => {
-        getGrades();
+        getListhws();
     }, []);
-
-    async function addGrade(formState) {
-        const response = await gradeApi.addGrade(formState);
-        const messageResponse = response.data;
-        if (messageResponse.responseType === "SUCCESS") {
-            toast.success(messageResponse.message);
-            setAddGradeDialogOpen(false);
-        }
-    }
+    
     async function deleteCell(e){
         e.preventDefault();
         const selectedIDs = selectionModel;
         try {
-            const response = await gradeApi.deleteGrade(selectedIDs);
+            const response = await listhwApi.deleteListhw(selectedIDs);
             const messageResponse = response.data;
             if (messageResponse.responseType === "SUCCESS") {
                 toast.success(messageResponse.message);
-                getGrades((r) => r.filter((x) => !x.id===selectedIDs));
-                getGrades();
+                getListhws((r) => r.filter((x) => !x.id===selectedIDs));
+                getListhws();
             }
             else{
                 toast.error(messageResponse.message);
@@ -52,32 +44,51 @@ function Grade(){
     }
 
     async function handleCellChange(params, newValue) {
-        const gradeIndex = grades.findIndex(grade => {
-            return grade.id === params.id;
+        const listhwIndex = listhws.findIndex(listhw => {
+            return listhw.id === params.id;
         });
-        const updateGrades = [... grades];
-        updateGrades[gradeIndex][params.field] = newValue;
-        setGrades(updateGrades)
+        const updateListhws = [... listhws];
+        updateListhws[listhwIndex][params.field] = newValue;
+        setListhws(updateListhws)
         const id = params.id;
-        const response = await gradeApi.updateGrade(id,updateGrades[gradeIndex]);
+        const response = await listhwApi.updateListhw(id,updateListhws[listhwIndex]);
         const messageResponse = response.data;
     }
+
     const columns = [
         {
-            field: "grade",
-            headerName: "Grade",
+            field: "id",
+            headerName: "ID",
+            width: 150,
+            editable: false,
+        },
+        {
+            field: "defination",
+            headerName: "Defination",
             width: 150,
             editable: true,
         },
         {
-            field: "submit_id",
-            headerName: "Submit ID",
+            field: "file",
+            headerName: "file",
             width: 150,
             editable: true,
         },
         {
-            field: "student_id",
-            headerName: "Student ID",
+            field: "time",
+            headerName: "Time",
+            width: 150,
+            editable: true,
+        },
+        {
+            field: "assistant_id",
+            headerName: "Assistant ID",
+            width: 150,
+            editable: true,
+        },
+        {
+            field: "lesson_id",
+            headerName: "Lesson ID",
             width: 150,
             editable: true,
         },
@@ -96,23 +107,17 @@ function Grade(){
             }
         },
     ]
+
     return(
         <div>
             <AppBar className="appbar"
                     position="static"
                     color="secondary"
             >
-                <Toolbar>
-                    <Button className="bttn"
-                            onClick={() => setAddGradeDialogOpen(true)}
-                            color="inherit"
-                    >
-                        Add Grade
-                    </Button>
-                </Toolbar>
             </AppBar>
+
             <h2>
-                GRADES
+                HOMEWORKS
             </h2>
             <Box sx={{height: 400,
                 width: '80%',
@@ -123,7 +128,7 @@ function Grade(){
                     border: 2,
                     borderColor:'secondary.light'
                 }}
-                          rows={grades}
+                          rows={listhws}
                           columns={columns}
                           pageSize={5}
                           rowsPerPageOptions={[5]}
@@ -143,13 +148,8 @@ function Grade(){
                           }}
                 />
             </Box>
-            <AddGrade isOpen={isAddGradeDialogOpen}
-                       close={() => setAddGradeDialogOpen(false)}
-                       addGrade={addGrade}
-            />
         </div>
     );
-
 }
-export default Grade;
 
+export default Listhw;
